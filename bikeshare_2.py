@@ -32,14 +32,14 @@ def get_filters():
             day = input('all | monday | tuesday | wednesday | thursday | friday | saturday | sunday\n').lower()
             print('-'*40)
             # if the input not good, raise it
-            if ((city not in ['chicago', 'new york city', 'washington']) or 
-                (month not in ['all', 'january', 'february', 'march', 'april', 'may', 'june']) or 
+            if ((city not in ['chicago', 'new york city', 'washington']) or
+                (month not in ['all', 'january', 'february', 'march', 'april', 'may', 'june']) or
                 (day not in ['all', 'monday', 'tuesday', 'thursday', 'friday', 'saturday', 'sunday'])):
                     raise Exception
             confirm = (input('Looks like you want {0}, {1}, {2}. If not, type no, else type yes\n'.format(city,month,day)))
             if confirm.lower() == 'no':
                 raise Exception
-                
+
             break
         except:
             print('Well, wrong input, try again........')
@@ -62,7 +62,7 @@ def load_data(city, month, day):
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
-    """        
+    """
     # load data file into a dataframe
     df = pd.read_csv(CITY_DATA[city])
 
@@ -77,7 +77,7 @@ def load_data(city, month, day):
     if month != 'all':
         # use the index of the months list to get the corresponding int
         months = ['january', 'february', 'march', 'april', 'may', 'june']
-        month = months.index(month) + 1    
+        month = months.index(month) + 1
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
 
@@ -101,11 +101,11 @@ def time_stats(df):
 
     # display the most common day of week
     da = df['day_of_week'].mode()[0]
-    print('Most common day of week is: {}'.format(da))    
+    print('Most common day of week is: {}'.format(da))
 
     # display the most common start hour
     hr = df['Start Time'].dt.hour.mode()[0]
-    print('-Most common start hour is: {}'.format(hr))    
+    print('-Most common start hour is: {}'.format(hr))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -166,13 +166,13 @@ def user_stats(df):
         print('Type--{0}, Count--{1}'.format(atype, ut[atype]))
 
     # Display counts of gender
-    if 'Gender' in df:        
+    if 'Gender' in df:
         gd = df['Gender'].value_counts()
         for agender in gd.index:
             print('Type--{0}, Count--{1}'.format(agender, gd[agender]))
     else:
         print('Gender is not presented in the city of given dataframe')
-            
+
     # Display earliest, most recent, and most common year of birth
     if 'Birth Year' in df:
         ymin = df['Birth Year'].min()
@@ -184,7 +184,7 @@ def user_stats(df):
         print('--Most Common: {}'.format(ymode))
     else:
         print('Birth Year is not presented in the city of given dataframe')
-        
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -196,27 +196,27 @@ def show5line(df, idx):
     while True:
         seeraw = input('\nWould you like to see 5 more lines of raw data? Enter yes or no.\n')
         if seeraw.lower() == 'no':
-            break                        
+            break
         print(df[idx:idx+5])
         idx += 5
-    
+
 
 def main():
     while True:
         # generate needed dataframe via user demand
         city, month, day = get_filters()
         df = load_data(city, month, day)
-        
-        # generate stats info 
+
+        # generate stats info
         time_stats(df)
         station_stats(df)
         trip_duration_stats(df)
-        user_stats(df)        
-        
+        user_stats(df)
+
         # if needed, generate raw data line, 5 lines once
         idx = 0
         show5line(df, idx)
-        
+
         # restart or not
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
