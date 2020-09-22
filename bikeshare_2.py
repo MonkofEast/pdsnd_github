@@ -188,7 +188,7 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-def show5line(df, idx):
+def nice5(df, idx):
     '''
     Print 5 lines of raw data from df, start from idx
     Keep printing 5 lines until showed halting
@@ -215,7 +215,7 @@ def main():
 
         # if needed, generate raw data line, 5 lines once
         idx = 0
-        show5line(df, idx)
+        nice5(df, idx)
 
         # restart or not
         restart = input('\nWould you like to restart? Enter yes or no.\n')
