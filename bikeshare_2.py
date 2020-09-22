@@ -217,7 +217,7 @@ def main():
         idx = 0
         show5line(df, idx)
 
-        # restart or not
+        # restart or not, made-up 4 the project
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
