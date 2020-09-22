@@ -204,8 +204,8 @@ def nice5(df, idx):
 def main():
     while True:
         # generate needed dataframe via user demand
-        city, month, day = get_filters()
-        df = load_data(city, month, day)
+        city, month, hardday = get_filters()
+        df = load_data(city, month, hardday)
 
         # generate stats info
         time_stats(df)
