@@ -188,7 +188,7 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-def show5line(df, idx):
+def nice5(df, idx):
     '''
     Print 5 lines of raw data from df, start from idx
     Keep printing 5 lines until showed halting
@@ -204,10 +204,17 @@ def show5line(df, idx):
 def main():
     while True:
         # generate needed dataframe via user demand
+<<<<<<< HEAD
         city, month, day = get_filters()
         df = load_data(city, month, day)
 
         # generate stats info, and this update is made up for project
+=======
+        city, month, hardday = get_filters()
+        df = load_data(city, month, hardday)
+
+        # generate stats info
+>>>>>>> refactoring
         time_stats(df)
         station_stats(df)
         trip_duration_stats(df)
@@ -215,9 +222,15 @@ def main():
 
         # if needed, generate raw data line, 5 lines once
         idx = 0
+<<<<<<< HEAD
         show5line(df, idx)
 
         # restart or not, made-up 4 the project
+=======
+        nice5(df, idx)
+
+        # restart or not
+>>>>>>> refactoring
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
